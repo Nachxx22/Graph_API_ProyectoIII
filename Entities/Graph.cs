@@ -5,9 +5,10 @@ namespace graph_api.Entities
 {
     public class Graph {
         private static int currentId = 0;
+        private static LinkedList nodes;
+        private static LinkedList edges;
 
         private int id;
-        private List<Node> nodes;        
 
         public Graph() {
             this.id = currentId++;
@@ -23,11 +24,31 @@ namespace graph_api.Entities
             set { this.id = value; }
         }
 
-        public List<Node> Nodes { 
+        public void addNode(Node e)
+        {
+            if (nodes == null)
+            {
+                nodes = new LinkedList();
+            }
+            nodes.addLast(e);
+        }
+        public LinkedList Nodes { 
             get => nodes; 
         }
-        public List<Edge> Edges{
-            get => Edges;
+        /*
+        public void addEdge(Edge e)
+        {
+            if (edges ==null)
+            {
+                edges = new LinkedList();
+            }
+            edges.addLast(e);
         }
+        */
+        /*
+        public LinkedList Edges{
+            get => edges;
+        }
+        */
     }
 }

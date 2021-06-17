@@ -55,6 +55,34 @@ namespace graph_api.Entities
 
         }
 
+        public void eliminar(int index)
+        {
+            if(head==null)
+            {
+                return;
+            }
+
+            LinkedListNode temp = head;
+            if (index==0)
+            {
+               head = temp.Siguiente;
+            }
+
+            for (int i = 0; temp != null && i<index-1;i++)
+            {
+                temp = temp.Siguiente;
+            }
+
+            if (temp == null || temp.Siguiente == null)
+            {
+                return;
+            }
+
+            LinkedListNode next = temp.Siguiente.Siguiente;
+            temp.Siguiente = next;
+            size--;
+        }
+
         public Object ver(int indice)
         {
             LinkedListNode temp = head;
