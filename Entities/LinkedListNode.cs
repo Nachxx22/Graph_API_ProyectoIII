@@ -18,12 +18,14 @@ namespace graph_api.Entities
         public LinkedListNode versig(){
             return this.siguiente;
         }
-        void agregar(LinkedListNode n){
+         void agregar(LinkedListNode n){
             this.siguiente=n;
         }
-        Object Verdato(){
+        public Object Verdato(){
             return this.dato;
         }
+        
+        
         public LinkedListNode Siguiente
         {
             get => siguiente;

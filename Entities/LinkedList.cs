@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace graph_api.Entities
 {
@@ -32,6 +33,44 @@ namespace graph_api.Entities
                 size++;
 
             }
+        }
+
+        public void printlist(LinkedList lista)
+        {
+            if (lista.head == null)
+            {
+                Debug.WriteLine("La lista esta vacia");
+            }
+            else
+            {
+                for (int i = 0; i < lista.size; i++) {
+                    if (lista.ver(i) != null)
+                    {
+                        Debug.WriteLine(lista.ver(i)+"");
+                    }
+                    else
+                    { Debug.WriteLine("Esta vacio");}
+                }
+            }
+
+        }
+
+        public Object ver(int indice)
+        {
+            LinkedListNode temp = head;
+            for (int i = 0; i < indice; i++)
+            {
+                temp = temp.Siguiente;
+            }
+
+            if (temp != null)
+            {
+                if (temp.Verdato() != null)
+                {
+                    return temp.Verdato();
+                }
+                else{return null;}
+            }else{return null;}
         }
 
 
