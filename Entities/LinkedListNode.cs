@@ -5,34 +5,34 @@ namespace graph_api.Entities
 {
     public class LinkedListNode
     {
-        private LinkedListNode siguente;
+        private LinkedListNode siguiente;
         private Object dato;
         private LinkedListNode prev;
 
-        LinkedListNode(Object dato){
+         public LinkedListNode(Object dato){
             this.dato=dato;
-            this.siguente=null;
+            this.siguiente=null;
             this.prev=null;
         }
 
-        LinkedListNode versig(){
-            return this.siguente;
+        public LinkedListNode versig(){
+            return this.siguiente;
         }
         void agregar(LinkedListNode n){
-            this.siguente=n;
+            this.siguiente=n;
         }
         Object Verdato(){
             return this.dato;
         }
-        public string Siguiente
+        public LinkedListNode Siguiente
         {
             get => siguiente;
-            set => this.siguiente = siguiente;
+            set => siguiente = value;
         }
-        public string Previo
+        public LinkedListNode Previo
         {
             get => prev;
-            set => this.prev = prev;
+            set => prev = value;
         }
     }
 }

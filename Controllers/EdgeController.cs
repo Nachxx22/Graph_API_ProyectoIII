@@ -10,7 +10,7 @@ namespace graph_api.Controllers
 {
     [ApiController]
     [Route("Graph/edges")]
-    public class NodeController : ControllerBase
+    public class EdgeController : ControllerBase
     {        
         // private readonly ILogger<NodeController> _logger;        
 
@@ -24,9 +24,9 @@ namespace graph_api.Controllers
         {
             return Ok();
         }
-        [HttpPost]
-        public IActionResult NewEdge(){
-        }
+       // [HttpPost]
+       // public IActionResult NewEdge(){
+        //}
         
     }
 }

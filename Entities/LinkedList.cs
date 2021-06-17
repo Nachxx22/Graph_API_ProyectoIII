@@ -16,27 +16,35 @@ namespace graph_api.Entities
 
 
         //Añadir de último a la lista 
-        public addLast(Object e){
+        public void addLast(Object e){
             if(this.head==null){
                 LinkedListNode temp=head;
-                while(temp.versig != null){
-                    temp=temp.versig;
+                while(temp.Siguiente != null){
+                    temp=temp.Siguiente;
                 }
                 LinkedListNode n= new LinkedListNode(e);
-                temp.siguiente =n;
-                n.prev=temp;
+                temp.Siguiente=n;
+                n.Previo=temp;
                 size++;
             }
             else{
                 head=new LinkedListNode(e);
                 size++;
-    
+
             }
         }
 
 
-
         //Para 
-        public void setSize(int size){this.setSize=size;}
+        public void setSize(int size)
+        {
+            this.size=size;
+        }
+
+        public int Size
+        {
+            get => size;
+            set => size=value;
+        }
     }
 }
