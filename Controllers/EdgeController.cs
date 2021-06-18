@@ -9,7 +9,7 @@ using graph_api.Entities;
 namespace graph_api.Controllers
 {
     [ApiController]
-    [Route("Graph/edges")]
+    [Route("Graph/{id}/edges")]
     public class EdgeController : ControllerBase
     {        
         // private readonly ILogger<NodeController> _logger;        
@@ -20,16 +20,38 @@ namespace graph_api.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult GetEdges(Guid id)
         {
-            return Ok();
+            foreach (var g in DB.db.Values) {//Graph g in 
+                if (g.Key == id) {
+                    return Ok(g.Edges);
+                }
+            }
+            return NotFound();
         }
         [HttpPost]
-       public IActionResult NewEdge()
-       {
-           Edge e = new Edge(0);
-           return Ok();
-       }
+        public IActionResult NewEdge(Guid id)
+        {
+            Edge e = new Edge();
+            foreach (var g in DB.db.Values) {//Graph g in 
+                if (g.Key == id) {
+                    g.addNode(e);
+                    return Ok();
+                }
+            }
+            return NotFound();
+        }
+        [HttpGet("{id2}")]
+        public IActionResult GetEdge(Guid id,int id2)
+        {
+            foreach (var g in DB.db.Values) {//Graph g in 
+                if (g.Key == id)
+                {
+                    g.Edges.ver(id2);
+                }
+            }
+            return NotFound();
+        }
         
     }
 }

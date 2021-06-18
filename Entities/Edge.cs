@@ -5,8 +5,8 @@ namespace graph_api.Entities
 {
     public class Edge
     {
-        private int currentid=0;
-        private int id;
+        internal int currentid=0;
+        internal int id;
 
         public  Edge(){
             this.currentid=currentid++;

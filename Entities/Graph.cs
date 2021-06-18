@@ -4,9 +4,10 @@ using System.Collections.Generic;
 namespace graph_api.Entities
 {
     public class Graph {
-        private static int currentId = 0;
-        private static LinkedList nodes;
-        private Guid key = Guid.NewGuid();
+        internal static int currentId = 0;
+        internal static LinkedList nodes;
+        internal Guid key = Guid.NewGuid();
+        internal static LinkedList edges;
 
         private int id;
 
@@ -40,7 +41,12 @@ namespace graph_api.Entities
         public LinkedList Nodes { 
             get => nodes; 
         }
-        /*
+
+        internal LinkedList getNodes()
+        {
+            return nodes;
+    }
+        
         public void addEdge(Edge e)
         {
             if (edges ==null)
@@ -49,11 +55,10 @@ namespace graph_api.Entities
             }
             edges.addLast(e);
         }
-        */
-        /*
+        
         public LinkedList Edges{
             get => edges;
         }
-        */
+        
     }
 }

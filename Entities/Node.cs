@@ -6,11 +6,9 @@ namespace graph_api.Entities
 {
     public class Node
     {
-        private static int currentId = 0;
-        private int id;
-        private String name;
-        private static LinkedList edges;
-        private Guid UUID = Guid.NewGuid();
+        internal static int currentId = 0;
+        internal int id;
+        internal String name;
 
         public Node() { 
             this.id = Node.currentId++;
@@ -22,7 +20,7 @@ namespace graph_api.Entities
             this.id = id;
         }
 
-        public string Value
+        public string Name
         {
             get => name;
             set => this.name = value;
@@ -32,19 +30,6 @@ namespace graph_api.Entities
         { 
             get => id; 
             set => id = value; 
-        }
-        
-        public void addEdge(Edge e)
-        {
-            if (edges ==null)
-            {
-                edges = new LinkedList();
-            }
-            edges.addLast(e);
-        }
-        
-        public LinkedList Edges{
-            get => edges;
         }
         
     }

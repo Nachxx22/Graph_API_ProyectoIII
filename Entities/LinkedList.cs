@@ -6,8 +6,8 @@ namespace graph_api.Entities
 {
     public class LinkedList
     {
-        LinkedListNode head;
-        int size;
+        internal LinkedListNode head;
+        internal int size;
 
 
         public LinkedList(){
@@ -17,10 +17,11 @@ namespace graph_api.Entities
 
 
         //Añadir de último a la lista 
-        public void addLast(Object e){
-            if(this.head==null){
+         internal void addLast(Object e){
+            if(this.head != null){
                 LinkedListNode temp=head;
-                while(temp.Siguiente != null){
+                while(temp.Siguiente != null )
+                {
                     temp=temp.Siguiente;
                 }
                 LinkedListNode n= new LinkedListNode(e);

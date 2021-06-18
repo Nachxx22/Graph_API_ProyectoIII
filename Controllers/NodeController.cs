@@ -24,7 +24,7 @@ namespace graph_api.Controllers
         {
             foreach (var g in DB.db.Values) {//Graph g in 
                 if (g.Key == id) {
-                    return Ok(g.Nodes);
+                    return Ok(g.getNodes());
                 }
             }
             return NotFound();
@@ -38,6 +38,17 @@ namespace graph_api.Controllers
                 if (g.Key == id) {
                     g.addNode(n);
                     return Ok();
+                }
+            }
+            return NotFound();
+        }
+        [HttpGet("{id2}")]
+        public IActionResult GetNode(Guid id,int id2)
+        {
+            foreach (var g in DB.db.Values) {//Graph g in 
+                if (g.Key == id)
+                {
+                    g.Nodes.ver(id2);
                 }
             }
             return NotFound();

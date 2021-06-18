@@ -5,9 +5,9 @@ namespace graph_api.Entities
 {
     public class LinkedListNode
     {
-        private LinkedListNode siguiente;
-        private Object dato;
-        private LinkedListNode prev;
+        internal LinkedListNode siguiente;
+        internal Object dato;
+        internal LinkedListNode prev;
 
          public LinkedListNode(Object dato){
             this.dato=dato;
@@ -15,23 +15,23 @@ namespace graph_api.Entities
             this.prev=null;
         }
 
-        public LinkedListNode versig(){
-            return this.siguiente;
+        internal LinkedListNode versig(){
+            return siguiente;
         }
-         void agregar(LinkedListNode n){
+         internal void agregar(LinkedListNode n){
             this.siguiente=n;
         }
-        public Object Verdato(){
+        internal Object Verdato(){
             return this.dato;
         }
         
         
-        public LinkedListNode Siguiente
+        internal LinkedListNode Siguiente
         {
             get => siguiente;
             set => siguiente = value;
         }
-        public LinkedListNode Previo
+        internal LinkedListNode Previo
         {
             get => prev;
             set => prev = value;
