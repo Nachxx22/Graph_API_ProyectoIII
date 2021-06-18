@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.SignalR;
 
 namespace graph_api.Entities
 {
@@ -7,10 +8,13 @@ namespace graph_api.Entities
     {
         private static int currentId = 0;
         private int id;
-        private String value;
+        private String name;
+        private static LinkedList edges;
+        private Guid UUID = Guid.NewGuid();
 
         public Node() { 
             this.id = Node.currentId++;
+            
         }
 
         public Node(int id)
@@ -20,8 +24,8 @@ namespace graph_api.Entities
 
         public string Value
         {
-            get => value;
-            set => this.value = value;
+            get => name;
+            set => this.name = value;
         }
         
         public int Id 
@@ -29,5 +33,19 @@ namespace graph_api.Entities
             get => id; 
             set => id = value; 
         }
+        
+        public void addEdge(Edge e)
+        {
+            if (edges ==null)
+            {
+                edges = new LinkedList();
+            }
+            edges.addLast(e);
+        }
+        
+        public LinkedList Edges{
+            get => edges;
+        }
+        
     }
 }

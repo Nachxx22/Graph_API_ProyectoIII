@@ -6,7 +6,6 @@ namespace graph_api.Entities
     public class Graph {
         private static int currentId = 0;
         private static LinkedList nodes;
-        private static LinkedList edges;
 
         private int id;
 
