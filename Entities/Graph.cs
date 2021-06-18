@@ -6,6 +6,7 @@ namespace graph_api.Entities
     public class Graph {
         private static int currentId = 0;
         private static LinkedList nodes;
+        private Guid key = Guid.NewGuid();
 
         private int id;
 
@@ -23,7 +24,12 @@ namespace graph_api.Entities
             set { this.id = value; }
         }
 
-        public void addNode(Node e)
+        public Guid Key
+        {
+            get => key;
+        }
+
+        public void addNode(Object e)
         {
             if (nodes == null)
             {

@@ -24,9 +24,12 @@ namespace graph_api.Controllers
         {
             return Ok();
         }
-       // [HttpPost]
-       // public IActionResult NewEdge(){
-        //}
+        [HttpPost]
+       public IActionResult NewEdge()
+       {
+           Edge e = new Edge(0);
+           return Ok();
+       }
         
     }
 }

@@ -9,7 +9,7 @@ using graph_api.Entities;
 namespace graph_api.Controllers
 {
     [ApiController]
-    [Route("Graph/nodes")]
+    [Route("Graph/{id}/nodes")]
     public class NodeController : ControllerBase
     {        
         // private readonly ILogger<NodeController> _logger;        
@@ -20,9 +20,27 @@ namespace graph_api.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult Get(Guid id)
         {
-            return Ok();
+            foreach (var g in DB.db.Values) {//Graph g in 
+                if (g.Key == id) {
+                    return Ok(g.Nodes);
+                }
+            }
+            return NotFound();
+        }
+        
+        [HttpPost]
+        public IActionResult CreateNewNode(Guid id)
+        {
+            Node n = new Node();
+            foreach (var g in DB.db.Values) {//Graph g in 
+                if (g.Key == id) {
+                    g.addNode(n);
+                    return Ok();
+                }
+            }
+            return NotFound();
         }
         
     }

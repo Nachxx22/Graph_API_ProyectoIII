@@ -13,7 +13,7 @@ namespace graph_api.Controllers
     public class GraphController : ControllerBase
     {        
         private readonly ILogger<GraphController> _logger;        
-        private static List<Graph> graphs = new List<Graph>();
+       // private static List<Graph> graphs = new List<Graph>();
 
         public GraphController(ILogger<GraphController> logger)
         {
@@ -21,16 +21,17 @@ namespace graph_api.Controllers
         }
 
         [HttpGet]
-        public List<Graph> GetAllGraphs()
+        public Dictionary<Guid,Graph> GetAllGraphs()
         {
-            return GraphController.graphs;
+            return DB.db;
+            //   return GraphController.graphs;
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetGraph(int id)
+        public IActionResult GetGraph(Guid id)
         {
-            foreach (Graph g in graphs) {
-                if (g.Id == id) {
+            foreach (var g in DB.db.Values) {//Graph g in 
+                if (g.Key == id) {
                     return Ok(g);
                 }
             }
@@ -40,7 +41,9 @@ namespace graph_api.Controllers
         [HttpPost]
         public IActionResult CreateNewGraph()
         {
-            GraphController.graphs.Add(new Graph());
+            Graph g = new Graph();
+            DB.db.Add(g.Key,g);
+           // GraphController.graphs.Add(new Graph());
             return Ok();
         }
     }
