@@ -19,6 +19,7 @@ namespace graph_api.Entities
         {
             this.id = id;
         }
+        
 
         public string Name
         {

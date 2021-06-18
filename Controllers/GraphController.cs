@@ -46,5 +46,19 @@ namespace graph_api.Controllers
             // GraphController.graphs.Add(new Graph());
             return Ok();
         }
+
+        [HttpDelete ("{id}")]
+
+        public IActionResult DeleteGraph(Guid id)
+        {
+            foreach (var g in DB.db.Values) {//Graph g in 
+                if (g.Key == id)
+                {
+                    DB.db.Remove(id);
+                    return Ok();
+                }
+            }
+            return NotFound();
+        }
     }
 }
