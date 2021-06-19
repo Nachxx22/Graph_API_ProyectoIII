@@ -41,5 +41,7 @@ namespace graph_api.Entities
             if (this.Id == other.Id) return 0;
             return 1;
         }
+
+
     }
 }

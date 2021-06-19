@@ -47,7 +47,7 @@ namespace graph_api.Entities
                 }
                 else
                 {
-                    _current = _current.next;
+                    _current = _current?.next;
                     return _current != null;
                 }
             }
@@ -60,7 +60,7 @@ namespace graph_api.Entities
 
             public T Current
             {
-                get { return _current.info; }
+                get { return _current != null ? _current.info : default; }
             }
 
             object IEnumerator.Current

@@ -1,0 +1,75 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@ 
+
+@{
+
+}
+
+asd
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<script> 
+
+    function CreateGraphs() {
+        axios.post("/Graphs", {}).then(function (e) { console.log(e); })
+    }
+    function GetGraphs() {
+        axios.get("/Graphs", {}).then(function (e) { console.log(e); })
+    }
+    function DeleteGraphs() {
+        axios.delete("/Graphs", {}).then(function (e) { console.log(e); })
+    }
+    function GetGraph(id) {
+        axios.get("/Graphs/" + id, {}).then(function (e) { console.log(e); })
+    }
+    function DeleteGraph(id) {
+        axios.delete("/Graphs/" + id, {}).then(function (e) { console.log(e); })
+    }
+    function CreateNode(id, entity) {
+        axios.post("/Graphs/" + id + "/nodes", { entity: entity }).then(function (e) { console.log(e); })
+    }
+    function GetNodes(id) {
+        axios.get("/Graphs/" + id + "/nodes", {}).then(function (e) { console.log(e); })
+    }
+    function UpdateNode(id, nodeId, entity) {
+        axios.put("/Graphs/" + id + "/nodes/" + nodeId, { entity: entity }).then(function (e) { console.log(e); })
+    }
+    function DeleteNode(id, nodeId) {
+        axios.delete("/Graphs/" + id + "/nodes/" + nodeId, {}).then(function (e) { console.log(e); })
+    }
+    function DeleteNode(id) {
+        axios.delete("/Graphs/" + id + "/nodes/", {}).then(function (e) { console.log(e); })
+    }
+    function GetEdges(id) {
+        axios.get("/Graphs/" + id + "/edges/", {}).then(function (e) { console.log(e); })
+    }
+    function DeleteEdge(id) {
+        axios.delete("/Graphs/" + id + "/edges/", {}).then(function (e) { console.log(e); })
+    }
+    function CreateEdge(id, startNode, endNode, weight) {
+        axios.post("/Graphs/" + id + "/edges/",
+            {
+                startNode: startNode,
+                endNode: endNode,
+                weight: weight
+            }).then(function (e) { console.log(e); })
+    }
+    function UpdateEdge(id, edgeId, startNode, endNode, weight) {
+        axios.put("/Graphs/" + id + "/edges/" + edgeId,
+            {
+                startNode: startNode,
+                endNode: endNode,
+                weight: weight
+            }).then(function (e) { console.log(e); })
+    }
+    function DeleteEdge(id, edgeId) {
+        axios.delete("/Graphs/" + id + "/edges/" + edgeId, {}).then(function (e) { console.log(e); })
+    }
+
+
+
+
+
+</script>

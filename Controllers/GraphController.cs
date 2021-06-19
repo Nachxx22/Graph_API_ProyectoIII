@@ -27,8 +27,8 @@ namespace graph_api.Controllers
         [HttpPost]
         public IActionResult CreateGraphs()
         {
-            var newId = Graphs != null ? Graphs.Max(g => g.Id) : 0;
-            Graphs.Add(new Graph(newId));
+            var newId = Graphs != null ? Graphs.Max(g => g?.Id) ?? 0 : 0;
+            Graphs.AddLast(new Graph(newId));
 
             return new JsonResult(new
             {
@@ -60,7 +60,7 @@ namespace graph_api.Controllers
         {
             if (Graphs != null)
             {
-                var result = Graphs.FirstOrDefault(w => w.Id == id);
+                var result = Graphs.FirstOrDefault(w => w?.Id == id);
                 return result != null ?
                     new JsonResult(result) :
                     NotFound();
@@ -76,7 +76,7 @@ namespace graph_api.Controllers
         {
             if (Graphs != null)
             {
-                var result = Graphs.FirstOrDefault(w => w.Id == id);
+                var result = Graphs.FirstOrDefault(w => w?.Id == id);
 
                 if (result != null)
                 {
@@ -97,12 +97,12 @@ namespace graph_api.Controllers
         {
             if (Graphs != null)
             {
-                var graph = Graphs.FirstOrDefault(w => w.Id == id);
+                var graph = Graphs.FirstOrDefault(w => w?.Id == id);
 
                 if (graph != null)
                 {
                     int newId = graph.NewNodeId();
-                    graph.Nodes.Add(new Node(newId, entity));
+                    graph.Nodes.AddLast(new Node(newId, entity));
 
                     return new JsonResult(newId);
                 }
@@ -112,16 +112,16 @@ namespace graph_api.Controllers
         }
 
         //// PUT api/<GraphsController>/5 
-        [HttpPost("{id}/Nodes")]
+        [HttpGet("{id}/Nodes")] 
         public IActionResult GetNodes(int id)
         {
             if (Graphs != null)
             {
-                var result = Graphs.FirstOrDefault(w => w.Id == id);
+                var result = Graphs.FirstOrDefault(w => w?.Id == id);
 
                 if (result != null)
                 {
-                    return new JsonResult(result.Nodes);
+                    return new JsonResult(result?.Nodes);
                 }
             }
 
@@ -134,13 +134,13 @@ namespace graph_api.Controllers
         {
             if (Graphs != null)
             {
-                var graph = Graphs.FirstOrDefault(w => w.Id == id);
+                var graph = Graphs.FirstOrDefault(w => w?.Id == id);
                 if (graph != null)
                 {
-                    var node = graph.Nodes.FirstOrDefault(w => w.Id == nodeId);
+                    var node = graph.Nodes.FirstOrDefault(w => w?.Id == nodeId);
                     if (node != null)
                     {
-                        graph.Nodes.Where(w => w.Id == nodeId).ToList().ForEach(w => w.Entity = entity);
+                        graph.Nodes.Where(w => w?.Id == nodeId).ToList().ForEach(w => w.Entity = entity);
                         return Ok();
                     }
                 }
@@ -155,10 +155,10 @@ namespace graph_api.Controllers
         {
             if (Graphs != null)
             {
-                var graph = Graphs.FirstOrDefault(w => w.Id == id);
+                var graph = Graphs.FirstOrDefault(w => w?.Id == id);
                 if (graph != null)
                 {
-                    var node = graph.Nodes.FirstOrDefault(w => w.Id == nodeId);
+                    var node = graph.Nodes.FirstOrDefault(w => w?.Id == nodeId);
                     if (node != null)
                     {
                         graph.Nodes.Remove(node);
@@ -177,7 +177,7 @@ namespace graph_api.Controllers
 
             if (Graphs != null)
             {
-                var graph = Graphs.FirstOrDefault(w => w.Id == id);
+                var graph = Graphs.FirstOrDefault(w => w?.Id == id);
                 if (graph != null)
                 {
                     graph.Nodes.Clear();
@@ -194,7 +194,7 @@ namespace graph_api.Controllers
         {
             if (Graphs != null)
             {
-                var result = Graphs.FirstOrDefault(w => w.Id == id);
+                var result = Graphs.FirstOrDefault(w => w?.Id == id);
 
                 if (result != null)
                 {
@@ -213,7 +213,7 @@ namespace graph_api.Controllers
             {
                 if (Graphs != null)
                 {
-                    var graph = Graphs.FirstOrDefault(w => w.Id == id);
+                    var graph = Graphs.FirstOrDefault(w => w?.Id == id);
                     if (graph != null)
                     {
                         if (graph.Edges.Any())
@@ -239,12 +239,12 @@ namespace graph_api.Controllers
         {
             if (Graphs != null)
             {
-                var graph = Graphs.FirstOrDefault(w => w.Id == id);
+                var graph = Graphs.FirstOrDefault(w => w?.Id == id);
 
                 if (graph != null)
                 {
                     int newId = graph.NewEdgeId();
-                    graph.Edges.Add(new Edge(newId, startNode, endNode, weight));
+                    graph.Edges.AddLast(new Edge(newId, startNode, endNode, weight));
 
                     return new JsonResult(newId);
                 }
@@ -259,14 +259,14 @@ namespace graph_api.Controllers
         {
             if (Graphs != null)
             {
-                var graph = Graphs.FirstOrDefault(w => w.Id == id);
+                var graph = Graphs.FirstOrDefault(w => w?.Id == id);
 
                 if (graph != null)
                 {
-                    var edge = graph.Edges.FirstOrDefault(w => w.Id == edgeId);
+                    var edge = graph.Edges.FirstOrDefault(w => w?.Id == edgeId);
                     if (edge != null)
                     {
-                        graph.Edges.Where(w => w.Id == edgeId).ToList().ForEach(w => {
+                        graph.Edges.Where(w => w?.Id == edgeId).ToList().ForEach(w => {
                             w.start = startNode;
                             w.end = endNode;
                             w.weight = weight;
@@ -285,11 +285,11 @@ namespace graph_api.Controllers
         {
             if (Graphs != null)
             {
-                var graph = Graphs.FirstOrDefault(w => w.Id == id);
+                var graph = Graphs.FirstOrDefault(w => w?.Id == id);
 
                 if (graph != null)
                 {
-                    var edge = graph.Edges.FirstOrDefault(w => w.Id == edgeId);
+                    var edge = graph.Edges.FirstOrDefault(w => w?.Id == edgeId);
                     if (edge != null)
                     {
                         graph.Edges.Remove(edge);
@@ -307,7 +307,7 @@ namespace graph_api.Controllers
         {
             if (Graphs != null)
             {
-                var grapf = Graphs.FirstOrDefault(w => w.Id == id);
+                var grapf = Graphs.FirstOrDefault(w => w?.Id == id);
                 return new JsonResult(grapf.GetDegree(sort));
             }
             return NotFound();
@@ -319,7 +319,7 @@ namespace graph_api.Controllers
         {
             if (Graphs != null)
             {
-                var grapf = Graphs.FirstOrDefault(w => w.Id == id);
+                var grapf = Graphs.FirstOrDefault(w => w?.Id == id);
                 return new JsonResult(grapf.GetDijkstra(startNode, endNode));
             }
             return NotFound();

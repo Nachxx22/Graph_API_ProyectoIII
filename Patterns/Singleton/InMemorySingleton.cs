@@ -1,5 +1,4 @@
 ﻿using graph_api.Entities;
-using System.Collections.Generic;
 
 namespace graph_api.Controllers.Patterns.Singleton
 {

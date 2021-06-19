@@ -35,9 +35,42 @@ namespace graph_api.Entities
             get => edges;
         }
 
-        
-        public int NewNodeId() => Nodes.Any() ? Nodes.Max(w => w.Id) + 1 : 0; 
-        public int NewEdgeId() => Edges.Any() ? Edges.Max(w => w.Id) + 1 : 0;
+
+        public int NewNodeId()
+        {
+            if (!Nodes.Any())
+            {
+                return 0;
+            }
+
+            var maxVal = Nodes.Max(w => w?.Id);
+            if (maxVal != null)
+            {
+                return maxVal.Value + 1;
+            }
+            else
+            {
+                return 0; 
+            }
+        }
+
+        public int NewEdgeId()
+        {
+            if (!Edges.Any())
+            {
+                return 0;
+            }
+
+            var maxVal = Edges.Max(w => w?.Id);
+            if (maxVal != null)
+            {
+                return maxVal.Value + 1;
+            }
+            else
+            {
+                return 0;
+            }
+        } 
 
         internal object GetDegree(string sort)
         {

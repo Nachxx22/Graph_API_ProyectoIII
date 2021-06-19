@@ -1,0 +1,22 @@
+{
+  "name": "graph_api_proyectoiii",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nachxx22/Graph_API_ProyectoIII.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nachxx22/Graph_API_ProyectoIII/issues"
+  },
+  "homepage": "https://github.com/Nachxx22/Graph_API_ProyectoIII#readme",
+  "dependencies": {
+    "axios": "^0.21.1"
+  }
+}
