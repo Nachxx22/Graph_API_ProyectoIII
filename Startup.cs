@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using graph_api.Controllers.Patterns.Singleton;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -32,6 +33,7 @@ namespace graph_api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "graph_api", Version = "v1" });
             });
+            services.AddSingleton<InMemorySingleton>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
