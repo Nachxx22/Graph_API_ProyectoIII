@@ -28,6 +28,7 @@ namespace graph_api.Controllers
         public IActionResult CreateGraphs()
         {
             var newId = Graphs != null ? Graphs.Max(g => g?.Id) ?? 0 : 0;
+            newId++;
             Graphs.AddLast(new Graph(newId));
 
             return new JsonResult(new
@@ -93,7 +94,7 @@ namespace graph_api.Controllers
         //// PUT api/<GraphsController>/5
         //[HttpPut("{id}")]
         [HttpPost("{id}/Nodes")]
-        public IActionResult CreateNode(int id, Entity entity)
+        public IActionResult CreateNode(int id, [FromBody]Entity entity)
         {
             if (Graphs != null)
             {
@@ -150,27 +151,6 @@ namespace graph_api.Controllers
         }
 
         //// PUT api/<GraphsController>/5 
-        [HttpDelete("{id}/Nodes/{nodeId}")]
-        public IActionResult DeleteNode(int id, int nodeId)
-        {
-            if (Graphs != null)
-            {
-                var graph = Graphs.FirstOrDefault(w => w?.Id == id);
-                if (graph != null)
-                {
-                    var node = graph.Nodes.FirstOrDefault(w => w?.Id == nodeId);
-                    if (node != null)
-                    {
-                        graph.Nodes.Remove(node);
-                        return Ok();
-                    }
-                }
-            }
-
-            return StatusCode(500);
-        }
-
-        //// PUT api/<GraphsController>/5 
         [HttpDelete("{id}/Nodes")]
         public IActionResult DeleteNode(int id)
         {
@@ -187,6 +167,37 @@ namespace graph_api.Controllers
 
             return StatusCode(500);
         }
+
+        //// PUT api/<GraphsController>/5 
+        [HttpDelete("{id}/Nodes/{nodeId}")]
+        public IActionResult DeleteNode(int id, int nodeId)
+        {
+            if (Graphs != null)
+            {
+                var graph = Graphs.FirstOrDefault(w => w?.Id == id);
+                if (graph != null)
+                { 
+                    if (nodeId == -1)
+                    { 
+                        graph.Nodes.Clear();
+                        return Ok();
+                    }
+                    else
+                    { 
+                        var node = graph.Nodes.FirstOrDefault(w => w?.Id == nodeId);
+                        if (node != null)
+                        {
+                            graph.Nodes.Remove(node);
+                            return Ok();
+                        }
+                    }
+                }
+            }
+
+            return StatusCode(500);
+        }
+
+        
 
         //// PUT api/<GraphsController>/5 
         [HttpGet("{id}/edges")]
@@ -235,7 +246,7 @@ namespace graph_api.Controllers
 
         //// PUT api/<GraphsController>/5 
         [HttpPost("{id}/edges")]
-        public IActionResult CreateEdge(int id, int startNode, int endNode, int weight)
+        public IActionResult CreateEdge(int id, [FromBody]CreateEdgeRequest input)
         {
             if (Graphs != null)
             {
@@ -244,7 +255,7 @@ namespace graph_api.Controllers
                 if (graph != null)
                 {
                     int newId = graph.NewEdgeId();
-                    graph.Edges.AddLast(new Edge(newId, startNode, endNode, weight));
+                    graph.Edges.AddLast(new Edge(newId, input.startNode, input.endNode, input.weight));
 
                     return new JsonResult(newId);
                 }
@@ -255,7 +266,7 @@ namespace graph_api.Controllers
 
         //// PUT api/<GraphsController>/5 
         [HttpPut("{id}/edges/{edgeId}")]
-        public IActionResult UpdateEdge(int id, int edgeId, int startNode, int endNode, int weight)
+        public IActionResult UpdateEdge(int id, int edgeId, [FromBody] CreateEdgeRequest input)
         {
             if (Graphs != null)
             {
@@ -267,9 +278,9 @@ namespace graph_api.Controllers
                     if (edge != null)
                     {
                         graph.Edges.Where(w => w?.Id == edgeId).ToList().ForEach(w => {
-                            w.start = startNode;
-                            w.end = endNode;
-                            w.weight = weight;
+                            w.start = input.startNode;
+                            w.end = input.endNode;
+                            w.weight = input.weight;
                         });
                         return Ok();
                     }

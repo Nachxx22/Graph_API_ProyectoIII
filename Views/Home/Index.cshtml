@@ -1,16 +1,26 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@ 
+*@
 
 @{
 
 }
 
-asd
+@*<input id="Id" type="number" name="name" value="" />
+<input id="Value" type="text" name="name" value="" />
+<button onclick="create()">
+    Agregar Nodo
+</button>*@
 
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
 <script> 
+    function create() {
+        let Id = document.getElementById("Id").value;
+        let value = document.getElementById("Value").value;
+
+        CreateNode(Id, { Valor: value });
+
+    }
 
     function CreateGraphs() {
         axios.post("/Graphs", {}).then(function (e) { console.log(e); })
@@ -28,7 +38,11 @@ asd
         axios.delete("/Graphs/" + id, {}).then(function (e) { console.log(e); })
     }
     function CreateNode(id, entity) {
-        axios.post("/Graphs/" + id + "/nodes", { entity: entity }).then(function (e) { console.log(e); })
+        axios.post("/Graphs/" + id + "/nodes",  entity , {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        }).then(function (e) { console.log(e); })
     }
     function GetNodes(id) {
         axios.get("/Graphs/" + id + "/nodes", {}).then(function (e) { console.log(e); })
@@ -39,13 +53,13 @@ asd
     function DeleteNode(id, nodeId) {
         axios.delete("/Graphs/" + id + "/nodes/" + nodeId, {}).then(function (e) { console.log(e); })
     }
-    function DeleteNode(id) {
+    function DeleteNodes(id) {
         axios.delete("/Graphs/" + id + "/nodes/", {}).then(function (e) { console.log(e); })
     }
     function GetEdges(id) {
         axios.get("/Graphs/" + id + "/edges/", {}).then(function (e) { console.log(e); })
     }
-    function DeleteEdge(id) {
+    function DeleteEdges(id) {
         axios.delete("/Graphs/" + id + "/edges/", {}).then(function (e) { console.log(e); })
     }
     function CreateEdge(id, startNode, endNode, weight) {
@@ -54,7 +68,11 @@ asd
                 startNode: startNode,
                 endNode: endNode,
                 weight: weight
-            }).then(function (e) { console.log(e); })
+            }, {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        }).then(function (e) { console.log(e); })
     }
     function UpdateEdge(id, edgeId, startNode, endNode, weight) {
         axios.put("/Graphs/" + id + "/edges/" + edgeId,
@@ -67,9 +85,4 @@ asd
     function DeleteEdge(id, edgeId) {
         axios.delete("/Graphs/" + id + "/edges/" + edgeId, {}).then(function (e) { console.log(e); })
     }
-
-
-
-
-
 </script>
